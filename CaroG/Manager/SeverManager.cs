@@ -13,7 +13,6 @@ namespace CaroG.Manager
     public class SeverManager
     {
         #region Sever
-        Socket test = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         Socket Sever = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public void Createsever()
         {
