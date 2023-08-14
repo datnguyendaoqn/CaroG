@@ -30,7 +30,8 @@
         {
             components = new System.ComponentModel.Container();
             pnBoardchess = new Panel();
-            panel1 = new Panel();
+            pnStatus = new Panel();
+            LBname = new Label();
             tbName = new TextBox();
             panel2 = new Panel();
             pbIcon = new PictureBox();
@@ -43,6 +44,8 @@
             quitToolStripMenuItem = new ToolStripMenuItem();
             tbIPAddress = new TextBox();
             btnConnect = new Button();
+            lbstatus = new Label();
+            pnStatus.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbIcon).BeginInit();
             menuStrip1.SuspendLayout();
@@ -52,21 +55,36 @@
             // 
             pnBoardchess.Location = new Point(12, 27);
             pnBoardchess.Name = "pnBoardchess";
-            pnBoardchess.Size = new Size(761, 524);
+            pnBoardchess.Size = new Size(835, 820);
             pnBoardchess.TabIndex = 0;
             // 
-            // panel1
+            // pnStatus
             // 
-            panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            panel1.Location = new Point(791, 27);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(365, 306);
-            panel1.TabIndex = 1;
+            pnStatus.BackgroundImageLayout = ImageLayout.Stretch;
+            pnStatus.Controls.Add(lbstatus);
+            pnStatus.Controls.Add(LBname);
+            pnStatus.Location = new Point(853, 27);
+            pnStatus.Name = "pnStatus";
+            pnStatus.Size = new Size(365, 306);
+            pnStatus.TabIndex = 1;
+            // 
+            // LBname
+            // 
+            LBname.AutoSize = true;
+            LBname.BackColor = SystemColors.Menu;
+            LBname.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            LBname.ForeColor = SystemColors.ActiveCaptionText;
+            LBname.Location = new Point(20, 20);
+            LBname.Name = "LBname";
+            LBname.Size = new Size(94, 21);
+            LBname.TabIndex = 0;
+            LBname.Text = "Your name:";
+            LBname.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tbName
             // 
             tbName.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            tbName.Location = new Point(791, 345);
+            tbName.Location = new Point(853, 339);
             tbName.Multiline = true;
             tbName.Name = "tbName";
             tbName.ReadOnly = true;
@@ -76,15 +94,15 @@
             // panel2
             // 
             panel2.Controls.Add(pbIcon);
-            panel2.Location = new Point(929, 342);
+            panel2.Location = new Point(1020, 339);
             panel2.Name = "panel2";
-            panel2.Size = new Size(227, 184);
+            panel2.Size = new Size(198, 170);
             panel2.TabIndex = 3;
             // 
             // pbIcon
             // 
             pbIcon.BackgroundImageLayout = ImageLayout.Stretch;
-            pbIcon.Location = new Point(3, 3);
+            pbIcon.Location = new Point(0, 0);
             pbIcon.Name = "pbIcon";
             pbIcon.Size = new Size(194, 167);
             pbIcon.TabIndex = 0;
@@ -96,7 +114,7 @@
             // 
             // pgbtime
             // 
-            pgbtime.Location = new Point(791, 380);
+            pgbtime.Location = new Point(853, 374);
             pgbtime.Name = "pgbtime";
             pgbtime.Size = new Size(132, 23);
             pgbtime.TabIndex = 4;
@@ -143,14 +161,15 @@
             // 
             // tbIPAddress
             // 
-            tbIPAddress.Location = new Point(791, 409);
+            tbIPAddress.Location = new Point(853, 403);
             tbIPAddress.Name = "tbIPAddress";
             tbIPAddress.Size = new Size(132, 23);
             tbIPAddress.TabIndex = 6;
             // 
             // btnConnect
             // 
-            btnConnect.Location = new Point(791, 438);
+            btnConnect.ForeColor = SystemColors.WindowText;
+            btnConnect.Location = new Point(853, 432);
             btnConnect.Name = "btnConnect";
             btnConnect.Size = new Size(132, 23);
             btnConnect.TabIndex = 7;
@@ -158,18 +177,29 @@
             btnConnect.UseVisualStyleBackColor = true;
             btnConnect.Click += btnConnect_Click;
             // 
+            // lbstatus
+            // 
+            lbstatus.AutoSize = true;
+            lbstatus.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbstatus.ForeColor = SystemColors.ActiveCaptionText;
+            lbstatus.Location = new Point(20, 60);
+            lbstatus.Name = "lbstatus";
+            lbstatus.Size = new Size(59, 22);
+            lbstatus.TabIndex = 1;
+            lbstatus.Text = "label1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1393, 878);
             BackColor = SystemColors.WindowFrame;
-            ClientSize = new Size(1393, 613);
             Controls.Add(btnConnect);
             Controls.Add(tbIPAddress);
             Controls.Add(pgbtime);
             Controls.Add(panel2);
             Controls.Add(tbName);
-            Controls.Add(panel1);
+            Controls.Add(pnStatus);
             Controls.Add(pnBoardchess);
             Controls.Add(menuStrip1);
             ForeColor = SystemColors.ActiveCaptionText;
@@ -180,6 +210,8 @@
             Text = "Form1";
             FormClosing += Form1_FormClosing;
             Shown += Form1_Shown;
+            pnStatus.ResumeLayout(false);
+            pnStatus.PerformLayout();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbIcon).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -191,7 +223,7 @@
         #endregion
 
         private Panel pnBoardchess;
-        private Panel panel1;
+        private Panel pnStatus;
         private TextBox tbName;
         private Panel panel2;
         private PictureBox pbIcon;
@@ -204,5 +236,7 @@
         private ToolStripMenuItem quitToolStripMenuItem;
         private TextBox tbIPAddress;
         private Button btnConnect;
+        private Label LBname;
+        public Label lbstatus;
     }
 }

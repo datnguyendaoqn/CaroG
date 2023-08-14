@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using CaroG.Class;
 
 namespace CaroG.Manager
 {
@@ -23,6 +24,8 @@ namespace CaroG.Manager
             Thread acceptclient = new Thread(() =>
             {
                 Client = Sever.Accept();
+                Program.form1.Listen();
+                
             });
             acceptclient.IsBackground = true;
             acceptclient.Start();

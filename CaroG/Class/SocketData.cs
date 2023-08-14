@@ -27,6 +27,7 @@ namespace CaroG.Class
             Undo,
             EndGame,
             AgreeUndo,
+            Connect,
             Quit
 
         }

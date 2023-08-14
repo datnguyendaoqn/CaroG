@@ -11,7 +11,7 @@ namespace CaroG.Class
         {
             public static int Widthchess = 40;
             public static int Heightchess = 40;
-            public static int limit = 10;
+            public static int limit = 20;
         }
    
 }
