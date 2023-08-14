@@ -11,13 +11,14 @@ namespace CaroG
         public Form1()
         {
             InitializeComponent();
-            Chessboard = new ManagerChessBoard(pnBoardchess, tbName, pbIcon);
+            Chessboard = new ManagerChessBoard(pnBoardchess, tbName, pbIcon, LBname);
             Chessboard.DrawBoardChess();
             Chessboard.Endgame += Chessboard_Endgame;
             Chessboard.Loadicon += Chessboard_Loadicon;
             pgbtime.Maximum = 1000;
             Socketmanager = new SeverManager();
             Chessboard.Getinform += Chessboard_Getinform;
+            pnBoardchess.Enabled = false;
         }
 
         private void Chessboard_Getinform(object? sender, ManagerChessBoard.btninfor e)
@@ -96,24 +97,31 @@ namespace CaroG
             if (string.IsNullOrEmpty(tbIPAddress.Text)) { tbIPAddress.Text = Socketmanager.GetIPAddress(NetworkInterfaceType.Wireless80211); }
 
         }
-
         private void btnConnect_Click(object sender, EventArgs e)
         {
             Socketmanager.IP = tbIPAddress.Text;
             if (!Socketmanager.Connectsever())
             {
+                Chessboard.LoadName(0);
                 Socketmanager.Createsever();
                 pnBoardchess.Enabled = true;
+                lbstatus.Text = "Wait others to connect";
             }
             else
             {
+                lbstatus.Text = "Connect successfully";
+                Chessboard.LoadName(1);
                 pnBoardchess.Enabled = false;
                 Socketmanager.IsSever = false;
+                    Socketmanager.Send(new SocketData(null, (int)SocketData.C.Connect,null));
                 Listen();
             }
 
         }
-        void Listen()
+
+
+
+        public void Listen()
         {
             Thread clientlistten = new Thread(() =>
             {
@@ -128,6 +136,7 @@ namespace CaroG
             clientlistten.IsBackground = true;
             clientlistten.Start();
         }
+
         void ProcessData(SocketData data)
         {
             switch (data.Command)
@@ -194,6 +203,13 @@ namespace CaroG
                     }));
                     MessageBox.Show(data.Message);
                     Listen();
+                    break;
+                case(int)SocketData.C.Connect:
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                    lbstatus.Text = "Connect successfully";
+                        MessageBox.Show(lbstatus.Text);
+                    }));
                     break;
 
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,9 +23,12 @@ namespace CaroG.Manager
         private TextBox nameplayer;
         private PictureBox iconplayer;
         private Panel chessboard;
+        private Label lbname;
         public Panel Chessboard { get => chessboard; set => chessboard = value; }
         public TextBox Nameplayer { get => nameplayer; set => nameplayer = value; }
         public PictureBox Iconplayer { get => iconplayer; set => iconplayer = value; }
+        public Label Lbname { get => lbname; set => lbname = value; }
+
         private event EventHandler<EventArgs> endgame;
         public event EventHandler<EventArgs> Endgame
         {
@@ -40,11 +44,13 @@ namespace CaroG.Manager
 
         #endregion
         #region Initialize
-        public ManagerChessBoard(Panel chessboard, TextBox tbName, PictureBox pbIcon)
+        public ManagerChessBoard(Panel chessboard, TextBox tbName, PictureBox pbIcon,Label lbName)
         {
             this.chessboard = chessboard;
             nameplayer = tbName;
             iconplayer = pbIcon;
+            this.lbname= lbName;
+
         }
         #endregion
         #region Method
@@ -130,6 +136,10 @@ namespace CaroG.Manager
             iconplayer.BackgroundImage = playerList[Currentplayer].Icon;
             nameplayer.Text = playerList[Currentplayer].Name;
         }
+        public void LoadName(int stt)
+        {
+            lbname.Text = "Your name : " + playerList[stt].Name;
+        }
 
         Point getposision(Button btn)
         {
@@ -140,7 +150,7 @@ namespace CaroG.Manager
         }
         private bool IsEndGame(Button btn)
         {
-            return IsVertical(btn) || IsHorizontal(btn) || IsMainDiagonal(btn) || IsSubDiagonal(btn);
+            return  IsVertical(btn)|| IsHorizontal(btn) || IsMainDiagonal(btn) || IsSubDiagonal(btn);
 
         }
         private bool IsVertical(Button btn)
@@ -198,23 +208,23 @@ namespace CaroG.Manager
             int count = 1;
             for (int i = 1; i < Constant.limit; i++)
             {
-                if (pos.X - i < 0 || pos.Y - i < 0) { break; }
-                if (Matrix[pos.Y - i][pos.X - i].BackgroundImage == btn.BackgroundImage) { count++; }
-                else
-                    break;
-            }
-            for (int i = 1; i < Constant.limit; i++)
-            {
-                if (pos.X + i >= Constant.limit || pos.Y + i >= Constant.limit) { break; }
-                else
+                if (pos.Y - i < 0 || pos.X - i < 0) { break; }
+                if (Matrix[pos.Y - i][pos.X - i].BackgroundImage == btn.BackgroundImage)
                 {
-                    if (Matrix[pos.Y + 1][pos.X + 1].BackgroundImage == btn.BackgroundImage) { count++; }
-                    else
-                        break;
+                    count++;
                 }
-
+                else { break; }
             }
-            return count == 5;
+            for (int i = 1; i < Constant.limit;i++)
+            {
+                if ( pos.Y+i >= Constant.limit||pos.X+i >= Constant.limit) { break; }
+                if (Matrix[pos.Y+i][pos.X+i].BackgroundImage==btn.BackgroundImage)
+                {
+                    count++;
+                }
+                else { break; }
+            }
+                return count == 5;
         }
         private bool IsSubDiagonal(Button btn)
         {
