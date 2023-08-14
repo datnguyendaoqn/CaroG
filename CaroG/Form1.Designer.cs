@@ -162,6 +162,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(1393, 613);
             Controls.Add(btnConnect);
             Controls.Add(tbIPAddress);
@@ -171,7 +172,7 @@
             Controls.Add(panel1);
             Controls.Add(pnBoardchess);
             Controls.Add(menuStrip1);
-            ForeColor = SystemColors.ControlLightLight;
+            ForeColor = SystemColors.ActiveCaptionText;
             MainMenuStrip = menuStrip1;
             MaximumSize = new Size(2000, 2000);
             MinimumSize = new Size(938, 575);
