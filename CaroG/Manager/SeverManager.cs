@@ -18,7 +18,7 @@ namespace CaroG.Manager
         public void Createsever()
         {
             string address = IP;
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(IP), 9999);
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(IP), Port);
             Sever.Bind(ipep);
             Sever.Listen(10);
             Thread acceptclient = new Thread(() =>
@@ -38,7 +38,7 @@ namespace CaroG.Manager
         public bool Connectsever()
         {
             string address = IP;
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(IP), 9999);
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(IP), Port);
             try
             {
                 Client.Connect(ipep);
@@ -52,6 +52,7 @@ namespace CaroG.Manager
         #endregion
         #region Both
         public string IP = "";
+        public int Port = 0;
         public bool IsSever;
         public object Receive()
         {

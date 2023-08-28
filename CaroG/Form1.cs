@@ -100,6 +100,7 @@ namespace CaroG
         private void btnConnect_Click(object sender, EventArgs e)
         {
             Socketmanager.IP = tbIPAddress.Text;
+            Socketmanager.Port = int.Parse(tbPort.Text);
             if (!Socketmanager.Connectsever())
             {
                 Chessboard.LoadName(0);
@@ -113,7 +114,7 @@ namespace CaroG
                 Chessboard.LoadName(1);
                 pnBoardchess.Enabled = false;
                 Socketmanager.IsSever = false;
-                    Socketmanager.Send(new SocketData(null, (int)SocketData.C.Connect,null));
+                Socketmanager.Send(new SocketData(null, (int)SocketData.C.Connect, null));
                 Listen();
             }
 
@@ -204,10 +205,10 @@ namespace CaroG
                     MessageBox.Show(data.Message);
                     Listen();
                     break;
-                case(int)SocketData.C.Connect:
+                case (int)SocketData.C.Connect:
                     this.Invoke((MethodInvoker)(() =>
                     {
-                    lbstatus.Text = "Connect successfully";
+                        lbstatus.Text = "Connect successfully";
                         MessageBox.Show(lbstatus.Text);
                     }));
                     break;
